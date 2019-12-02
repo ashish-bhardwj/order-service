@@ -81,8 +81,8 @@ public class OrderServiceImpl implements OrderService {
 			restTemplate.setMessageConverters(messageConverters);
 			try {
 				logger.debug("Calling restaurant search service to get item details");
-				ItemFetchDto item = restTemplate.getForObject(restaurantServiceItemUrl+itemDto.getItemId(), ItemFetchDto.class);
-				//  ItemFetchDto item = restaurantFeignClient.getItemById(itemDto.getItemId());				  
+				//ItemFetchDto item = restTemplate.getForObject(restaurantServiceItemUrl+itemDto.getItemId(), ItemFetchDto.class);
+				  ItemFetchDto item = restaurantFeignClient.getItemById(itemDto.getItemId());				  
 				if(item==null ) {
 
 					orderRepository.delete(order);
@@ -180,8 +180,8 @@ public class OrderServiceImpl implements OrderService {
 			messageConverters.add(new FormHttpMessageConverter());
 			restTemplate.setMessageConverters(messageConverters);
 			try {
-				ItemFetchDto item = restTemplate.getForObject(restaurantServiceItemUrl+itemDto.getItemId(), ItemFetchDto.class);
-				//  ItemFetchDto item = restaurantFeignClient.getItemById(itemDto.getItemId());
+				//ItemFetchDto item = restTemplate.getForObject(restaurantServiceItemUrl+itemDto.getItemId(), ItemFetchDto.class);
+				ItemFetchDto item = restaurantFeignClient.getItemById(itemDto.getItemId());
 				if(item==null ) {
 					// deleting previously updated items 
 					for(OrderedItem itemsUpdateToBeReverted: updateItemsListToReturn) {
